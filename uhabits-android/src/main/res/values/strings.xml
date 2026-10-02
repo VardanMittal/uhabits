@@ -260,83 +260,8 @@
         <item quantity="other">%d hours</item>
     </plurals>
 
-    <!-- Gamification -->
-    <string name="gamification_level">Level %d</string>
-    <string name="gamification_xp">%d XP</string>
-    <string name="gamification_xp_to_next">%d / %d XP</string>
-    <string name="gamification_streak">%d Day Streak</string>
-    <string name="gamification_streak_fire">🔥 %d</string>
-    <string name="gamification_perfect_day">Perfect Day!</string>
-    <string name="gamification_level_up">Level Up! 🎉</string>
-    <string name="gamification_xp_earned">+%d XP</string>
-    <string name="gamification_today_progress">Today: %d%%</string>
-    <string name="gamification_best_streak">Best: %d days</string>
-
-    <!-- Badges -->
-    <string name="badge_first_flame">First Flame</string>
-    <string name="badge_first_flame_desc">Achieve a 3-day streak</string>
-    <string name="badge_weekender">Weekender</string>
-    <string name="badge_weekender_desc">Complete all habits on a weekend</string>
-    <string name="badge_sharpshooter">Sharpshooter</string>
-    <string name="badge_sharpshooter_desc">Achieve a 7-day streak</string>
-    <string name="badge_diamond_streak">Diamond Streak</string>
-    <string name="badge_diamond_streak_desc">Achieve a 30-day streak</string>
-    <string name="badge_habit_master">Habit Master</string>
-    <string name="badge_habit_master_desc">Achieve a 100-day streak</string>
-    <string name="badge_perfect_week">Perfect Week</string>
-    <string name="badge_perfect_week_desc">Complete all habits for 7 straight days</string>
-    <string name="badge_perfect_month">Perfect Month</string>
-    <string name="badge_perfect_month_desc">Complete all habits for 30 straight days</string>
-    <string name="badge_early_bird">Early Bird</string>
-    <string name="badge_early_bird_desc">Check in before 8 AM</string>
-    <string name="badge_unlocked">Badge Unlocked!</string>
-    <string name="badge_locked">Locked</string>
-
-    <!-- Review -->
-    <string name="review">Review</string>
-    <string name="weekly_review">Weekly Review</string>
-    <string name="monthly_review">Monthly Review</string>
-    <string name="yearly_review">Yearly Review</string>
-    <string name="completion_rate">Completion Rate</string>
-    <string name="completion_rate_percent">%d%%</string>
-    <string name="vs_last_week">vs last week</string>
-    <string name="vs_last_month">vs last month</string>
-    <string name="best_habits">Best Habits</string>
-    <string name="needs_improvement">Needs Improvement</string>
-    <string name="xp_earned_this_week">XP Earned This Week</string>
-    <string name="xp_earned_this_month">XP Earned This Month</string>
-    <string name="xp_earned_this_year">XP Earned This Year</string>
-    <string name="active_streaks">Active Streaks</string>
-    <string name="broken_streaks">Broken Streaks</string>
-    <string name="insights">Insights</string>
-    <string name="insight_improved">You improved by %d%% this week! 🎉</string>
-    <string name="insight_declined">Down %d%% — let\'s bounce back! 💪</string>
-    <string name="insight_steady">Consistent performance — keep it up! ⭐</string>
-    <string name="monthly_heatmap">Monthly Heatmap</string>
-    <string name="habit_rankings">Habit Rankings</string>
-    <string name="achievements_this_month">Achievements This Month</string>
-    <string name="trend">Trend</string>
-    <string name="year_at_a_glance">Year at a Glance</string>
-    <string name="monthly_trends">Monthly Trends</string>
-    <string name="year_statistics">Year Statistics</string>
-    <string name="total_completions">Total Completions</string>
-    <string name="total_days_tracked">Total Days Tracked</string>
-    <string name="best_month">Best Month</string>
-    <string name="habit_tier_list">Habit Tier List</string>
-    <string name="lifetime_achievements">Lifetime Achievements</string>
-    <string name="review_empty_title">No data yet</string>
-    <string name="review_empty_subtitle">Start tracking your habits to see reviews here.</string>
-    <string name="tier_s_label">S Tier — Exceptional</string>
-    <string name="tier_a_label">A Tier — Great</string>
-    <string name="tier_b_label">B Tier — Good</string>
-    <string name="tier_c_label">C Tier — Needs Work</string>
-    <string name="tier_d_label">D Tier — Critical</string>
-    <string name="week_number">Week %d</string>
-    <string name="no_badges_yet">No badges earned yet. Keep going!</string>
-    <string name="consistency">Consistency: %d%%</string>
-
     <!-- Bottom Navigation -->
     <string name="nav_habits">Habits</string>
     <string name="nav_routine">Routine</string>
-    <string name="nav_review">Review</string>
 </resources>
+

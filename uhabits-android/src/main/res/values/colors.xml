@@ -91,49 +91,4 @@
     <color name="ic_launcher_background">#1976D2</color>
     <color name="color_background">@color/grey_200</color>
 
-    <!-- Gamification Colors -->
-    <color name="xp_gold">#FFD700</color>
-    <color name="xp_gold_light">#FFF3B0</color>
-    <color name="xp_gold_dark">#B8960F</color>
-    <color name="level_purple">#8B5CF6</color>
-    <color name="level_purple_light">#C4B5FD</color>
-    <color name="level_purple_dark">#6D28D9</color>
-    <color name="streak_fire">#EF4444</color>
-    <color name="streak_fire_light">#FCA5A5</color>
-    <color name="streak_orange">#F97316</color>
-    <color name="accent_emerald">#10B981</color>
-    <color name="accent_emerald_light">#6EE7B7</color>
-    <color name="accent_emerald_dark">#059669</color>
-    <color name="badge_bronze">#CD7F32</color>
-    <color name="badge_silver">#C0C0C0</color>
-    <color name="badge_gold">#FFD700</color>
-    <color name="badge_diamond">#B9F2FF</color>
-
-    <!-- Modern Surface Colors -->
-    <color name="surface_light">#FAFAFA</color>
-    <color name="surface_elevated_light">#FFFFFF</color>
-    <color name="surface_dark">#0F172A</color>
-    <color name="surface_elevated_dark">#1E293B</color>
-    <color name="surface_card_dark">#1E293B</color>
-
-    <!-- Review Heatmap Colors -->
-    <color name="heatmap_empty">#E5E7EB</color>
-    <color name="heatmap_low">#BBF7D0</color>
-    <color name="heatmap_medium">#4ADE80</color>
-    <color name="heatmap_high">#16A34A</color>
-    <color name="heatmap_max">#166534</color>
-    <color name="heatmap_empty_dark">#374151</color>
-
-    <!-- Tier Colors -->
-    <color name="tier_s">#FFD700</color>
-    <color name="tier_a">#10B981</color>
-    <color name="tier_b">#3B82F6</color>
-    <color name="tier_c">#F59E0B</color>
-    <color name="tier_d">#EF4444</color>
-
-    <!-- Modern Accent -->
-    <color name="modern_primary">#6366F1</color>
-    <color name="modern_primary_variant">#4F46E5</color>
-    <color name="modern_secondary">#10B981</color>
-    <color name="text_on_primary">#FFFFFF</color>
 </resources>

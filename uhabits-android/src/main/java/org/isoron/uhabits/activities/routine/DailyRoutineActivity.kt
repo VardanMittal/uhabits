@@ -19,7 +19,9 @@
 
 package org.isoron.uhabits.activities.routine
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,14 +31,10 @@ import org.isoron.uhabits.R
 import org.isoron.uhabits.activities.AndroidThemeSwitcher
 import org.isoron.uhabits.core.models.Habit
 import org.isoron.uhabits.core.models.PaletteColor
-import org.isoron.uhabits.core.preferences.Preferences
 import org.isoron.uhabits.databinding.ActivityDailyRoutineBinding
 import org.isoron.uhabits.utils.applyBottomInset
 import org.isoron.uhabits.utils.applyRootViewInsets
-import org.isoron.uhabits.utils.applyToolbarInsets
-import org.isoron.uhabits.utils.currentTheme
-import android.content.Intent
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import org.isoron.uhabits.utils.setupToolbar
 
 class DailyRoutineActivity : AppCompatActivity() {
 
@@ -55,21 +53,16 @@ class DailyRoutineActivity : AppCompatActivity() {
         themeSwitcher.apply()
 
         binding = ActivityDailyRoutineBinding.inflate(layoutInflater)
+        binding.root.setupToolbar(
+            toolbar = binding.toolbar,
+            title = getString(R.string.daily_routine),
+            color = PaletteColor(17),
+            theme = themeSwitcher.currentTheme,
+            displayHomeAsUpEnabled = false
+        )
         binding.root.applyRootViewInsets()
         binding.root.applyBottomInset()
-        binding.toolbar.applyToolbarInsets()
         setContentView(binding.root)
-
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
-        
-        // Theme the toolbar correctly if not night mode
-        if (!themeSwitcher.isNightMode) {
-            val color = themeSwitcher.currentTheme.color(PaletteColor(17)).toInt()
-            window.statusBarColor = color
-            binding.toolbar.setBackgroundColor(color)
-        }
 
         repository = RoutineRepository(this)
         calendarSyncHelper = CalendarSyncHelper(this)
@@ -98,17 +91,15 @@ class DailyRoutineActivity : AppCompatActivity() {
         binding.fabAddRoutine.setOnClickListener {
             showAddEntryDialog()
         }
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
-        bottomNav.selectedItemId = R.id.nav_routine
-        bottomNav.setOnItemSelectedListener { item ->
+        binding.emptyState.setOnClickListener {
+            showAddEntryDialog()
+        }
+
+        binding.bottomNav.selectedItemId = R.id.nav_routine
+        binding.bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_habits -> {
-                    val intent = Intent(this, org.isoron.uhabits.activities.habits.list.ListHabitsActivity::class.java).apply {
-                        addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                    }
-                    startActivity(intent)
-                    overridePendingTransition(0, 0)
-                    finish()
+                    navigateToHabits()
                     true
                 }
                 else -> true
@@ -117,6 +108,34 @@ class DailyRoutineActivity : AppCompatActivity() {
         
         binding.btnSyncAll.setOnClickListener {
             syncAllEntries()
+        }
+    }
+
+    private fun navigateToHabits() {
+        val intent = Intent(this, org.isoron.uhabits.activities.habits.list.ListHabitsActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        }
+        startActivity(intent)
+        overridePendingTransition(0, 0)
+        finish()
+    }
+
+    override fun onBackPressed() {
+        navigateToHabits()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            navigateToHabits()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (binding.bottomNav.selectedItemId != R.id.nav_routine) {
+            binding.bottomNav.selectedItemId = R.id.nav_routine
         }
     }
 
@@ -132,6 +151,7 @@ class DailyRoutineActivity : AppCompatActivity() {
             binding.routineList.visibility = View.GONE
             binding.routineSummary.text = getString(R.string.routine_summary_empty)
             binding.btnSyncAll.isEnabled = false
+            binding.btnSyncAll.alpha = 0.5f
         } else {
             binding.emptyState.visibility = View.GONE
             binding.routineList.visibility = View.VISIBLE
@@ -139,6 +159,7 @@ class DailyRoutineActivity : AppCompatActivity() {
                 R.plurals.routine_summary_items, entries.size, entries.size
             )
             binding.btnSyncAll.isEnabled = true
+            binding.btnSyncAll.alpha = 1.0f
         }
     }
 
@@ -187,7 +208,7 @@ class DailyRoutineActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        finish()
+        navigateToHabits()
         return true
     }
 }

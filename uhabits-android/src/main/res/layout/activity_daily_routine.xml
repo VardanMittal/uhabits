@@ -24,27 +24,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/contrast0"
+    android:background="?attr/windowBackgroundColor"
     android:fitsSystemWindows="true"
     tools:context=".activities.routine.DailyRoutineActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/contrast0"
-        app:elevation="0dp">
+        app:elevation="2dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/contrast0"
-            android:elevation="0dp"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="@style/ThemeOverlay.AppCompat.Light"
-            app:title="@string/daily_routine"
-            app:titleTextAppearance="@style/TextAppearance.AppCompat.Headline"
-            app:titleTextColor="?attr/contrast100" />
+            style="@style/Toolbar"
+            app:popupTheme="?toolbarPopupTheme" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -59,15 +51,15 @@
             android:id="@+id/syncBarCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="6dp"
             app:cardCornerRadius="16dp"
-            app:cardElevation="0dp"
+            app:cardElevation="1dp"
             app:strokeWidth="1dp"
             app:strokeColor="?attr/contrast20"
-            app:cardBackgroundColor="?attr/contrast0">
+            app:cardBackgroundColor="?attr/cardBgColor">
 
             <LinearLayout
                 android:id="@+id/syncBar"
@@ -84,7 +76,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_calendar_sync"
-                    app:tint="?attr/contrast80"
+                    app:tint="?attr/colorAccent"
                     android:layout_marginEnd="12dp"
                     android:importantForAccessibility="no" />
 
@@ -113,20 +105,12 @@
                     app:iconGravity="textStart"
                     android:paddingStart="12dp"
                     android:paddingEnd="14dp"
-                    app:backgroundTint="#4ADE80"
+                    app:backgroundTint="?colorAccent"
                     android:textColor="@color/white"
                     app:iconTint="@color/white"
-                    app:elevation="1dp" />
+                    app:elevation="2dp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
-
-        <!-- Divider line -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="?attr/contrast20" />
 
         <!-- Modern Empty State -->
         <LinearLayout
@@ -182,7 +166,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:clipToPadding="false"
-            android:paddingTop="8dp"
+            android:paddingTop="6dp"
             android:paddingBottom="96dp" />
 
     </LinearLayout>
@@ -203,7 +187,7 @@
         android:textSize="14sp"
         app:icon="@drawable/ic_action_add_dark"
         android:textColor="@color/white"
-        app:backgroundTint="#4ADE80"
+        app:backgroundTint="?colorAccent"
         app:iconTint="@color/white"
         app:cornerRadius="28dp"
         app:elevation="6dp" />
@@ -211,14 +195,10 @@
     <!-- Modern Bottom Navigation View -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
+        style="@style/Widget.App.BottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="?attr/contrast0"
-        android:elevation="8dp"
-        app:itemIconTint="#4ADE80"
-        app:itemTextColor="#4ADE80"
         app:menu="@menu/bottom_nav_menu" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
-

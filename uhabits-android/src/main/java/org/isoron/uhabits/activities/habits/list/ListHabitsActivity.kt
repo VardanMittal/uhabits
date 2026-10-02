@@ -116,6 +116,9 @@ class ListHabitsActivity : AppCompatActivity(), Preferences.Listener {
         screen.onAttached()
         rootView.postInvalidate()
         midnightTimer.onResume()
+        if (rootView.bottomNav.selectedItemId != R.id.nav_habits) {
+            rootView.bottomNav.selectedItemId = R.id.nav_habits
+        }
 
         if (appComponent.reminderScheduler.hasHabitsWithReminders()) {
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
