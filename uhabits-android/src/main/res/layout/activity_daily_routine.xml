@@ -30,18 +30,21 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:elevation="2dp"
+            android:background="?attr/contrast0"
+            android:elevation="0dp"
             android:minHeight="?attr/actionBarSize"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:theme="@style/ThemeOverlay.AppCompat.Light"
             app:title="@string/daily_routine"
-            app:titleTextColor="@color/white" />
+            app:titleTextAppearance="@style/TextAppearance.AppCompat.Headline"
+            app:titleTextColor="?attr/contrast100" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -139,7 +142,7 @@
     </LinearLayout>
 
     <!-- FAB to add habit to routine -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fabAddRoutine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -148,9 +151,11 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="72dp"
-        android:contentDescription="@string/add_to_routine"
-        app:srcCompat="@drawable/ic_action_add_dark"
-        app:tint="@color/white" />
+        android:text="@string/add_to_routine"
+        app:icon="@drawable/ic_action_add_dark"
+        android:textColor="@color/white"
+        app:backgroundTint="#4ADE80"
+        app:iconTint="@color/white" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
@@ -158,6 +163,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="?attr/contrast0"
+        app:itemIconTint="#4ADE80"
+        app:itemTextColor="#4ADE80"
         app:menu="@menu/bottom_nav_menu" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
