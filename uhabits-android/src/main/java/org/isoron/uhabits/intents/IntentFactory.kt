@@ -60,6 +60,9 @@ class IntentFactory() {
     fun startSettingsActivity(context: Context) =
         Intent(context, SettingsActivity::class.java)
 
+    fun startDailyRoutineActivity(context: Context) =
+        Intent(context, org.isoron.uhabits.activities.routine.DailyRoutineActivity::class.java)
+
     fun startShowHabitActivity(context: Context, habit: Habit) =
         Intent(context, ShowHabitActivity::class.java).apply {
             data = Uri.parse(habit.uriString)

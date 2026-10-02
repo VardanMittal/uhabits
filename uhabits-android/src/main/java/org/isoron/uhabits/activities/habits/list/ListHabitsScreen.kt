@@ -263,6 +263,11 @@ class ListHabitsScreen(
         activity.startActivityForResult(intent, REQUEST_SETTINGS)
     }
 
+    override fun showDailyRoutineScreen() {
+        val intent = intentFactory.startDailyRoutineActivity(activity)
+        activity.startActivity(intent)
+    }
+
     override fun showColorPicker(defaultColor: PaletteColor, callback: OnColorPickedCallback) {
         val picker = colorPickerFactory.create(defaultColor, themeSwitcher.currentTheme!!)
         picker.setListener(callback)

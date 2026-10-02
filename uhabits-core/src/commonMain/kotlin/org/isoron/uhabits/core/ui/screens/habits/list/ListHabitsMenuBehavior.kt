@@ -52,6 +52,10 @@ class ListHabitsMenuBehavior(
         screen.showSettingsScreen()
     }
 
+    fun onViewDailyRoutine() {
+        screen.showDailyRoutineScreen()
+    }
+
     fun onSearchQueryChanged(query: String) {
         searchQuery = query
         updateAdapterFilter()
@@ -142,6 +146,7 @@ class ListHabitsMenuBehavior(
         fun showAboutScreen()
         fun showFAQScreen()
         fun showSettingsScreen()
+        fun showDailyRoutineScreen()
         fun showSelectHabitTypeDialog()
     }
 

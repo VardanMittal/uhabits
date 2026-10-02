@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2016-2025 Álinson Santos Xavier <git@axavier.org>
+  ~
+  ~ This file is part of Loop Habit Tracker.
+  ~
+  ~ Loop Habit Tracker is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by the
+  ~ Free Software Foundation, either version 3 of the License, or (at your
+  ~ option) any later version.
+  ~
+  ~ Loop Habit Tracker is distributed in the hope that it will be useful, but
+  ~ WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+  ~ or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+  ~ more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License along
+  ~ with this program. If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/contrast0"
+    android:fitsSystemWindows="true"
+    tools:context=".activities.routine.DailyRoutineActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:elevation="2dp"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:title="@string/daily_routine"
+            app:titleTextColor="@color/white" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <!-- Sync to Calendar bar -->
+        <LinearLayout
+            android:id="@+id/syncBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:background="?attr/contrast0">
+
+            <TextView
+                android:id="@+id/routineSummary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/routine_summary_empty"
+                android:textSize="@dimen/smallTextSize"
+                android:textColor="?attr/contrast60" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSyncAll"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sync_to_calendar"
+                android:textSize="@dimen/smallerTextSize"
+                app:icon="@drawable/ic_calendar_sync"
+                app:iconSize="18dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/contrast20" />
+
+        <!-- Empty state -->
+        <LinearLayout
+            android:id="@+id/emptyState"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone"
+            android:padding="32dp">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/ic_routine"
+                android:alpha="0.3"
+                android:importantForAccessibility="no" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/routine_empty_title"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="?attr/contrast60" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/routine_empty_subtitle"
+                android:textSize="@dimen/smallTextSize"
+                android:textColor="?attr/contrast40"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <!-- Timeline list -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/routineList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingTop="8dp"
+            android:paddingBottom="88dp" />
+
+    </LinearLayout>
+
+    <!-- FAB to add habit to routine -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddRoutine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/add_to_routine"
+        app:srcCompat="@drawable/ic_action_add_dark"
+        app:tint="@color/white" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

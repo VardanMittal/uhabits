@@ -238,4 +238,24 @@
     <string name="pref_midnight_delay_description">Wait until 3:00 AM to show a new day. Useful if you typically go to sleep after midnight. Requires app restart.</string>
     <string name="pref_animations_title">Disable animations</string>
     <string name="pref_animations_description">Disable confetti animation after adding a checkmark.</string>
+
+    <!-- Daily Routine Schedule -->
+    <string name="daily_routine">Daily Routine</string>
+    <string name="add_to_routine">Add to routine</string>
+    <string name="select_habit">Select habit</string>
+    <string name="start_time">Start Time</string>
+    <string name="end_time">End Time</string>
+    <string name="sync_to_calendar">Sync to Calendar</string>
+    <string name="routine_summary_empty">No habits in your routine yet.</string>
+    <plurals name="routine_summary_items">
+        <item quantity="one">%d habit in your daily routine.</item>
+        <item quantity="other">%d habits in your daily routine.</item>
+    </plurals>
+    <string name="routine_empty_title">Plan your day</string>
+    <string name="routine_empty_subtitle">Assign time slots to your habits and sync them to your calendar.</string>
+    <string name="no_habits_to_add">You don\'t have any habits to add. Create a habit first.</string>
+    <plurals name="duration_hours">
+        <item quantity="one">%d hour</item>
+        <item quantity="other">%d hours</item>
+    </plurals>
 </resources>
