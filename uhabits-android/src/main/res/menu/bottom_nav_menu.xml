@@ -2,10 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_habits"
-        android:title="Habits"
+        android:title="@string/nav_habits"
         android:icon="@drawable/ic_action_check" />
     <item
         android:id="@+id/nav_routine"
-        android:title="Routine"
+        android:title="@string/nav_routine"
         android:icon="@drawable/ic_routine" />
+    <item
+        android:id="@+id/nav_review"
+        android:title="@string/nav_review"
+        android:icon="@drawable/ic_review" />
 </menu>
