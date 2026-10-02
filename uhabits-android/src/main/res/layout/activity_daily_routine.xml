@@ -31,7 +31,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
+        android:background="?attr/contrast0"
         app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
@@ -54,45 +54,81 @@
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <!-- Sync to Calendar bar -->
-        <LinearLayout
-            android:id="@+id/syncBar"
+        <!-- Modern Sync & Summary Hero Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/syncBarCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:paddingStart="16dp"
-            android:paddingEnd="8dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:background="?attr/contrast0">
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="?attr/contrast20"
+            app:cardBackgroundColor="?attr/contrast0">
 
-            <TextView
-                android:id="@+id/routineSummary"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:id="@+id/syncBar"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/routine_summary_empty"
-                android:textSize="@dimen/smallTextSize"
-                android:textColor="?attr/contrast60" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnSyncAll"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sync_to_calendar"
-                android:textSize="@dimen/smallerTextSize"
-                app:icon="@drawable/ic_calendar_sync"
-                app:iconSize="18dp" />
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_calendar_sync"
+                    app:tint="?attr/contrast80"
+                    android:layout_marginEnd="12dp"
+                    android:importantForAccessibility="no" />
 
+                <TextView
+                    android:id="@+id/routineSummary"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/routine_summary_empty"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="?attr/contrast80" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSyncAll"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:text="@string/sync_to_calendar"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textAllCaps="false"
+                    app:cornerRadius="19dp"
+                    app:icon="@drawable/ic_calendar_sync"
+                    app:iconSize="16dp"
+                    app:iconGravity="textStart"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="14dp"
+                    app:backgroundTint="#4ADE80"
+                    android:textColor="@color/white"
+                    app:iconTint="@color/white"
+                    app:elevation="1dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Divider line -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:background="?attr/contrast20" />
 
-        <!-- Empty state -->
+        <!-- Modern Empty State -->
         <LinearLayout
             android:id="@+id/emptyState"
             android:layout_width="match_parent"
@@ -103,30 +139,40 @@
             android:visibility="gone"
             android:padding="32dp">
 
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/ic_routine"
-                android:alpha="0.3"
-                android:importantForAccessibility="no" />
+            <FrameLayout
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                android:background="@drawable/bg_routine_chip">
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_routine"
+                    app:tint="?attr/contrast60"
+                    android:alpha="0.8"
+                    android:importantForAccessibility="no" />
+            </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/routine_empty_title"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="?attr/contrast60" />
+                android:textColor="?attr/contrast100" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/routine_empty_subtitle"
-                android:textSize="@dimen/smallTextSize"
-                android:textColor="?attr/contrast40"
-                android:gravity="center" />
+                android:textSize="14sp"
+                android:textColor="?attr/contrast60"
+                android:gravity="center"
+                android:maxWidth="280dp" />
+
         </LinearLayout>
 
         <!-- Timeline list -->
@@ -137,11 +183,11 @@
             android:layout_weight="1"
             android:clipToPadding="false"
             android:paddingTop="8dp"
-            android:paddingBottom="88dp" />
+            android:paddingBottom="96dp" />
 
     </LinearLayout>
 
-    <!-- FAB to add habit to routine -->
+    <!-- Modern Pill FAB to add habit to routine -->
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fabAddRoutine"
         android:layout_width="wrap_content"
@@ -150,21 +196,29 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="72dp"
+        android:layout_marginBottom="76dp"
         android:text="@string/add_to_routine"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:textSize="14sp"
         app:icon="@drawable/ic_action_add_dark"
         android:textColor="@color/white"
         app:backgroundTint="#4ADE80"
-        app:iconTint="@color/white" />
+        app:iconTint="@color/white"
+        app:cornerRadius="28dp"
+        app:elevation="6dp" />
 
+    <!-- Modern Bottom Navigation View -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="?attr/contrast0"
+        android:elevation="8dp"
         app:itemIconTint="#4ADE80"
         app:itemTextColor="#4ADE80"
         app:menu="@menu/bottom_nav_menu" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+

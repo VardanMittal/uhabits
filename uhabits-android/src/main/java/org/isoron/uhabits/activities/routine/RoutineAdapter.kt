@@ -88,9 +88,11 @@ class RoutineAdapter(
             // Set the color accent
             val color = getColor(entry.habitColorIndex)
             binding.timelineDot.backgroundTintList = ColorStateList.valueOf(color)
+            binding.colorAccentStrip.setBackgroundColor(color)
 
             binding.btnDeleteEntry.setOnClickListener { onDelete(entry) }
             binding.btnSyncEntry.setOnClickListener { onSyncEntry(entry) }
+            binding.cardContainer.setOnClickListener { onEdit(entry) }
             binding.root.setOnClickListener { onEdit(entry) }
         }
     }
