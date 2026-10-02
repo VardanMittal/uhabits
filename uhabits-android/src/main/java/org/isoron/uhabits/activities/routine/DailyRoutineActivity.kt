@@ -35,6 +35,8 @@ import org.isoron.uhabits.utils.applyBottomInset
 import org.isoron.uhabits.utils.applyRootViewInsets
 import org.isoron.uhabits.utils.applyToolbarInsets
 import org.isoron.uhabits.utils.currentTheme
+import android.content.Intent
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class DailyRoutineActivity : AppCompatActivity() {
 
@@ -82,6 +84,7 @@ class DailyRoutineActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         adapter = RoutineAdapter(
             onDelete = { entry -> deleteEntry(entry) },
+            onEdit = { entry -> editEntry(entry) },
             onSyncEntry = { entry -> syncSingleEntry(entry) },
             getColor = { paletteIndex -> 
                 themeSwitcher.currentTheme.color(PaletteColor(paletteIndex)).toInt() 
@@ -94,6 +97,22 @@ class DailyRoutineActivity : AppCompatActivity() {
     private fun setupListeners() {
         binding.fabAddRoutine.setOnClickListener {
             showAddEntryDialog()
+        }
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
+        bottomNav.selectedItemId = R.id.nav_routine
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_habits -> {
+                    val intent = Intent(this, org.isoron.uhabits.activities.habits.list.ListHabitsActivity::class.java).apply {
+                        addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                    }
+                    startActivity(intent)
+                    overridePendingTransition(0, 0)
+                    finish()
+                    true
+                }
+                else -> true
+            }
         }
         
         binding.btnSyncAll.setOnClickListener {
@@ -128,8 +147,23 @@ class DailyRoutineActivity : AppCompatActivity() {
             activity = this,
             habits = allHabits,
             themeSwitcher = themeSwitcher,
+            entryToEdit = null,
             onEntryAdded = { entry ->
                 repository.insert(entry)
+                loadData()
+            }
+        )
+        dialog.show()
+    }
+
+    private fun editEntry(entry: RoutineEntry) {
+        val dialog = AddRoutineEntryDialog(
+            activity = this,
+            habits = allHabits,
+            themeSwitcher = themeSwitcher,
+            entryToEdit = entry,
+            onEntryAdded = { updatedEntry ->
+                repository.update(updatedEntry)
                 loadData()
             }
         )

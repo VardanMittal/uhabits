@@ -40,14 +40,14 @@ class AddRoutineEntryDialog(
     private val activity: AppCompatActivity,
     private val habits: List<Habit>,
     private val themeSwitcher: ThemeSwitcher,
-    private val onEntryAdded: (RoutineEntry) -> Unit
+    private val entryToEdit: RoutineEntry? = null, private val onEntryAdded: (RoutineEntry) -> Unit
 ) {
 
     private var selectedHabit: Habit? = null
-    private var startHour = 8
-    private var startMinute = 0
-    private var endHour = 9
-    private var endMinute = 0
+    private var startHour = entryToEdit?.startHour ?: 8
+    private var startMinute = entryToEdit?.startMinute ?: 0
+    private var endHour = entryToEdit?.endHour ?: 9
+    private var endMinute = entryToEdit?.endMinute ?: 0
 
     fun show() {
         if (habits.isEmpty()) {
@@ -65,6 +65,12 @@ class AddRoutineEntryDialog(
         val habitPicker = dialogView.findViewById<TextView>(R.id.habitPicker)
         val startTimePicker = dialogView.findViewById<TextView>(R.id.startTimePicker)
         val endTimePicker = dialogView.findViewById<TextView>(R.id.endTimePicker)
+
+        // Initialize from existing entry if present
+        if (entryToEdit != null) {
+            selectedHabit = habits.find { it.id == entryToEdit.habitId }
+            habitPicker.text = selectedHabit?.name ?: entryToEdit.habitName
+        }
 
         // Default display
         startTimePicker.text = CalendarSyncHelper.formatTime(startHour, startMinute)
@@ -102,20 +108,23 @@ class AddRoutineEntryDialog(
             }
         }
 
+        val title = if (entryToEdit != null) R.string.edit_routine else R.string.add_to_routine
         AlertDialog.Builder(activity)
-            .setTitle(R.string.add_to_routine)
+            .setTitle(title)
             .setView(dialogView)
             .setPositiveButton(R.string.save) { _, _ ->
                 val habit = selectedHabit
                 if (habit != null) {
                     val entry = RoutineEntry(
+                        id = entryToEdit?.id ?: -1,
                         habitId = habit.id ?: -1,
                         habitName = habit.name,
                         habitColorIndex = habit.color.paletteIndex,
                         startHour = startHour,
                         startMinute = startMinute,
                         endHour = endHour,
-                        endMinute = endMinute
+                        endMinute = endMinute,
+                        order = entryToEdit?.order ?: 0
                     )
                     onEntryAdded(entry)
                 }

@@ -36,8 +36,8 @@ class CalendarSyncHelper(private val context: Context) {
      * The event is set for today with the specified start and end time.
      */
     fun createEventForEntry(entry: RoutineEntry) {
-        val startMillis = getTimeMillis(entry.startHour, entry.startMinute)
-        val endMillis = getTimeMillis(entry.endHour, entry.endMinute)
+        val startMillis = getTimeMillisForStart(entry.startHour, entry.startMinute)
+        val endMillis = getTimeMillisForEnd(startMillis, entry.endHour, entry.endMinute)
 
         val intent = Intent(Intent.ACTION_INSERT).apply {
             data = CalendarContract.Events.CONTENT_URI
@@ -66,8 +66,8 @@ class CalendarSyncHelper(private val context: Context) {
     fun createAllEvents(entries: List<RoutineEntry>) {
         if (entries.isEmpty()) return
 
-        val startMillis = getTimeMillis(entries.first().startHour, entries.first().startMinute)
-        val endMillis = getTimeMillis(entries.last().endHour, entries.last().endMinute)
+        val startMillis = getTimeMillisForStart(entries.first().startHour, entries.first().startMinute)
+        val endMillis = getTimeMillisForEnd(startMillis, entries.last().endHour, entries.last().endMinute)
 
         val description = buildString {
             append("Daily Routine Schedule:\n\n")
@@ -98,8 +98,8 @@ class CalendarSyncHelper(private val context: Context) {
      * Creates a single recurring daily event for one routine entry.
      */
     fun createRecurringEventForEntry(entry: RoutineEntry) {
-        val startMillis = getTimeMillis(entry.startHour, entry.startMinute)
-        val endMillis = getTimeMillis(entry.endHour, entry.endMinute)
+        val startMillis = getTimeMillisForStart(entry.startHour, entry.startMinute)
+        val endMillis = getTimeMillisForEnd(startMillis, entry.endHour, entry.endMinute)
 
         val intent = Intent(Intent.ACTION_INSERT).apply {
             data = CalendarContract.Events.CONTENT_URI
@@ -118,12 +118,29 @@ class CalendarSyncHelper(private val context: Context) {
         context.startActivity(intent)
     }
 
-    private fun getTimeMillis(hour: Int, minute: Int): Long {
+    private fun getTimeMillisForStart(hour: Int, minute: Int): Long {
         val cal = Calendar.getInstance(TimeZone.getDefault())
+        val now = cal.timeInMillis
         cal.set(Calendar.HOUR_OF_DAY, hour)
         cal.set(Calendar.MINUTE, minute)
         cal.set(Calendar.SECOND, 0)
         cal.set(Calendar.MILLISECOND, 0)
+        if (cal.timeInMillis < now) {
+            cal.add(Calendar.DAY_OF_YEAR, 1)
+        }
+        return cal.timeInMillis
+    }
+
+    private fun getTimeMillisForEnd(startMillis: Long, hour: Int, minute: Int): Long {
+        val cal = Calendar.getInstance(TimeZone.getDefault())
+        cal.timeInMillis = startMillis
+        cal.set(Calendar.HOUR_OF_DAY, hour)
+        cal.set(Calendar.MINUTE, minute)
+        cal.set(Calendar.SECOND, 0)
+        cal.set(Calendar.MILLISECOND, 0)
+        if (cal.timeInMillis < startMillis) {
+            cal.add(Calendar.DAY_OF_YEAR, 1)
+        }
         return cal.timeInMillis
     }
 

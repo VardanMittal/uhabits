@@ -242,6 +242,7 @@
     <!-- Daily Routine Schedule -->
     <string name="daily_routine">Daily Routine</string>
     <string name="add_to_routine">Add to routine</string>
+    <string name="edit_routine">Edit routine</string>
     <string name="select_habit">Select habit</string>
     <string name="start_time">Start Time</string>
     <string name="end_time">End Time</string>

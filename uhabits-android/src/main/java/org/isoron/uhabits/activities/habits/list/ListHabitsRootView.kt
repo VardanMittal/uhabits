@@ -23,6 +23,9 @@ import android.content.Context
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.FrameLayout
 import android.widget.RelativeLayout
+import android.content.Intent
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import org.isoron.uhabits.activities.routine.DailyRoutineActivity
 import me.tatarka.inject.annotations.Inject
 import nl.dionsegijn.konfetti.xml.KonfettiView
 import org.isoron.uhabits.R
@@ -77,6 +80,23 @@ class ListHabitsRootView(
     val progressBar = TaskProgressBar(context, runner)
     val hintView: HintView
     val header = HeaderView(context, preferences, midnightTimer)
+    
+    val bottomNav = BottomNavigationView(context).apply {
+        id = android.view.View.generateViewId()
+        inflateMenu(R.menu.bottom_nav_menu)
+        selectedItemId = R.id.nav_habits
+        setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_routine -> {
+                    context.startActivity(Intent(context, DailyRoutineActivity::class.java).apply {
+                        addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    })
+                    true
+                }
+                else -> true
+            }
+        }
+    }
 
     init {
         val hints = resources.getStringArray(R.array.hints)
@@ -87,13 +107,30 @@ class ListHabitsRootView(
             background = sres.getDrawable(R.attr.windowBackgroundColor)
             addAtTop(konfettiView)
             addAtTop(tbar)
+            addAtBottom(bottomNav)
             addBelow(header, tbar)
-            addBelow(listView, header, height = MATCH_PARENT)
-            addBelow(llEmpty, header, height = MATCH_PARENT)
+            
+            // Adjust list view to stay above bottomNav
+            val lpList = RelativeLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT).apply {
+                addRule(RelativeLayout.BELOW, header.id)
+                addRule(RelativeLayout.ABOVE, bottomNav.id)
+            }
+            addView(listView, lpList)
+            
+            val lpEmpty = RelativeLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT).apply {
+                addRule(RelativeLayout.BELOW, header.id)
+                addRule(RelativeLayout.ABOVE, bottomNav.id)
+            }
+            addView(llEmpty, lpEmpty)
+
             addBelow(progressBar, header) {
                 it.topMargin = dp(-6.0f).toInt()
             }
-            addAtBottom(hintView)
+            
+            val lpHint = RelativeLayout.LayoutParams(MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT).apply {
+                addRule(RelativeLayout.ABOVE, bottomNav.id)
+            }
+            addView(hintView, lpHint)
         }
         rootView.setupToolbar(
             toolbar = tbar,

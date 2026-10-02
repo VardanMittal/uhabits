@@ -28,6 +28,7 @@ import org.isoron.uhabits.databinding.ItemRoutineEntryBinding
 
 class RoutineAdapter(
     private val onDelete: (RoutineEntry) -> Unit,
+    private val onEdit: (RoutineEntry) -> Unit,
     private val onSyncEntry: (RoutineEntry) -> Unit,
     private val getColor: (Int) -> Int
 ) : RecyclerView.Adapter<RoutineAdapter.RoutineViewHolder>() {
@@ -91,6 +92,7 @@ class RoutineAdapter(
 
             binding.btnDeleteEntry.setOnClickListener { onDelete(entry) }
             binding.btnSyncEntry.setOnClickListener { onSyncEntry(entry) }
+            binding.root.setOnClickListener { onEdit(entry) }
         }
     }
 }
